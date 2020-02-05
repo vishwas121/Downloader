@@ -1,10 +1,15 @@
 #!/bin/bash
 mkdir Youtube
 cd Youtube
-python3 ../fun_script.py ../$1
+if [ "$1" = NULL ]
+then
+	 python3 ../fun_script.py
+else
+	python3 ../fun_script.py "../${1}"
+fi
 cd ..
 ls Youtube > input.txt
-sed "s/\.webm/\.ogg/g" input.txt > input2.txt
+sed "s/\.webm\|\.mkv\|\.mp4/\.ogg/g" input.txt > input2.txt
 awk -F"[-.]" -f script.awk input2.txt > output.txt
 cd Youtube
 x=1
